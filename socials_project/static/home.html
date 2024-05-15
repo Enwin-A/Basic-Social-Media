@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Simple Social Media</h1>
+        <!-- Add logout button -->
+        <button id="logout-btn" class="button">Logout</button>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Display posts from followed users -->
+        <section id="posts">
+            <h2>Posts from Followed Users</h2>
+            <div id="post-list">
+                <!-- Post items will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- List of followed users -->
+        <aside id="followed-users">
+            <h2>Users You Follow</h2>
+            <ul id="followed-users-list">
+                <!-- Followed users will be dynamically added here -->
+            </ul>
+        </aside>
+
+        <!-- Picture upload form -->
+        <section id="picture-upload">
+            <h2>Upload Picture</h2>
+            <form id="post-picture-form">
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="file" name="image" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+        <!-- Display list of all users with follow button -->
+        <aside id="all-users" class="right-section">
+            <h2>All Users</h2>
+            <ul id="all-users-list">
+                <!-- All users will be dynamically added here -->
+            </ul>
+        </aside>
+    </main>
+
+    <!-- Include JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
