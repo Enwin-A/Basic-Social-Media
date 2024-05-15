@@ -23,12 +23,17 @@ from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from django.conf.urls.static import static
 from django.conf import settings
+from User_Relationship_App.views import FollowedUsersView, AllUsersView, FollowUserView, UnfollowUserView
 
 router = routers.DefaultRouter()
 router.register(r'relationships', RelationshipViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/users/', AllUsersView.as_view(), name='all-users'),
+    path('api/followed-users/', FollowedUsersView.as_view(), name='followed-users'),
+    path('api/follow/<int:user_id>/', FollowUserView.as_view(), name='follow-user'),
+    path('api/unfollow/<int:user_id>/', UnfollowUserView.as_view(), name='unfollow-user'),
     path('api/auth/', include('Authentication_App.urls')),  # Include Authentication_App URLs
     path('api/', include(router.urls)),  # Include User_Relationship_App URLs
     path('api/pictures/', PictureListCreate.as_view(), name='picture-list-create'),  # Include PictureListCreate view

@@ -30,7 +30,7 @@ class UserLoginView(APIView):
         if(password == password_matches):
             password_check = True #as the user.check_password(password) works with hashing
         if user and password_check:
-            # Return user data or token for authentication
+            # Return user data for authentication
             return Response({'message': 'Login successful!','user_id': user.id}, status=status.HTTP_200_OK)
         else:
 
