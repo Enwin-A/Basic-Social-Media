@@ -25,12 +25,13 @@ class UserLoginView(APIView):
         print(user)
         print(password)
         print(user.check_password(password))
+        print(user.id)
         password_matches = user.password
         if(password == password_matches):
             password_check = True #as the user.check_password(password) works with hashing
         if user and password_check:
             # Return user data or token for authentication
-            return Response({'message': 'Login successful!'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Login successful!','user_id': user.id}, status=status.HTTP_200_OK)
         else:
 
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

@@ -39,12 +39,23 @@ function handleLogin(event) {
     })
     .then(response => {
         if (response.ok) {
-            alert('Login successful!');
-            // Optionally, redirect to dashboard or home page
-            window.location.href = 'home.html';
+            
+            return response.json(); // Return the response JSON
         } else {
             alert('Login failed. Please check your credentials and try again.');
         }
+    })
+    .then(data => {
+        // Store the user_id in localStorage
+        // localStorage.setItem('user_id', data.user_id);
+        console.log(data);
+        console.log(data.user_id);
+        if (data.user_id){
+            localStorage.setItem('user_id', data.user_id);
+            console.log(data.user_id);
+        }
+        alert('Login successful!');
+        window.location.href = 'home.html';
     })
     .catch(error => {
         console.error('Error:', error);
@@ -54,14 +65,18 @@ function handleLogin(event) {
 // Function to handle picture posting form submission
 function handlePostPicture(event) {
     event.preventDefault();
-    
+    console.log('handlePostPicture');
     // Get form data
     const formData = new FormData(event.target);
-
+    const userId = localStorage.getItem('user_id');
+    console.log(userId);
+    console.log(formData);
+    formData.append('user_id', userId);
+    console.log(formData);
     // Send POST request to backend API for posting picture
     fetch('/api/pictures/', {
         method: 'POST',
-        body: formData
+        body: formData,
     })
     .then(response => {
         if (response.ok) {
@@ -153,10 +168,10 @@ if (document.getElementById('login-form')) {
     console.log('login-form found');
     document.getElementById('login-form').addEventListener('submit', handleLogin);
 }
-// if (document.getElementById('post-picture-form')) {
-//     console.log('post-picture-form found');
-//     document.getElementById('post-picture-form').addEventListener('submit', handlePostPicture);
-// }
+if (document.getElementById('post-picture-form')) {
+    console.log('post-picture-form found');
+    document.getElementById('post-picture-form').addEventListener('submit', handlePostPicture);
+}
 // Event listener for logout button
 if (document.getElementById('logout-btn')) {
     document.getElementById('logout-btn').addEventListener('click', handleLogout);
